@@ -1,5 +1,12 @@
-#version 100
+#version 330 core // ibl/prefilter.vert
+layout (location = 0) in vec3 aPos;
 
-void main() {
+out vec3 WorldPos;
 
+uniform mat4 projection, view;
+
+void main()
+{
+    WorldPos = aPos;
+    gl_Position = projection * view * vec4(WorldPos, 1.0);
 }

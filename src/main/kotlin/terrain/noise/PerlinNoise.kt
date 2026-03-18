@@ -1,9 +1,9 @@
-package terrain
+package terrain.noise
 
-import kotlin.math.*
+import kotlin.math.floor
 import kotlin.random.Random
 
-class PerlinNoise(override val seed:Int=42,override val scale:Float=1.0f):Noise
+class PerlinNoise(seed:Int=42,override val scale:Float=1.0f):Noise
 {
     private val perm=IntArray(512)
 
