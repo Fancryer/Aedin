@@ -5,7 +5,7 @@ class RidgedNoise(
     val octaves:Int=5,
     val lacunarity:Float=2.0f,
     val gain:Float=0.5f,
-    override val scale:Float=1.0f
+    override val amplitude:Float=1.0f
 ):Noise
 {
 

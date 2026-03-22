@@ -3,7 +3,7 @@ package terrain.noise
 import kotlin.math.floor
 import kotlin.random.Random
 
-class PerlinNoise(seed:Int=42,override val scale:Float=1.0f):Noise
+class PerlinNoise(seed:Int=42,override val amplitude:Float=1.0f):Noise
 {
     private val perm=IntArray(512)
 
@@ -39,7 +39,7 @@ class PerlinNoise(seed:Int=42,override val scale:Float=1.0f):Noise
         val x1=lerp(grad(aa,fx,fz),grad(ba,fx-1,fz),u)
         val x2=lerp(grad(ab,fx,fz-1),grad(bb,fx-1,fz-1),u)
 
-        return (lerp(x1,x2,v)+1.0f)/2.0f*scale  // Нормализация в [0,1]
+        return (lerp(x1,x2,v)+1.0f)/2.0f*amplitude  // Нормализация в [0,1]
     }
 
     private fun fade(t:Float):Float=t*t*t*(t*(t*6-15)+10)

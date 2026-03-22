@@ -357,14 +357,12 @@ class HDRIEnvironment(private val faceSize:Int=512)
                         GL_COLOR_ATTACHMENT0,
                         GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,
                         prefilterMap,
-                        mip  // <-- правильно указываем mip level
+                        mip
                     )
 
                     // Проверяем FBO после привязки
                     if(glCheckFramebufferStatus(GL_FRAMEBUFFER)!=GL_FRAMEBUFFER_COMPLETE)
-                    {
                         println("Framebuffer not complete after texture attachment for face $i, mip $mip")
-                    }
 
                     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
@@ -372,10 +370,7 @@ class HDRIEnvironment(private val faceSize:Int=512)
                     glDrawArrays(GL_TRIANGLES,0,36)
 
                     val error=glGetError()
-                    if(error!=GL_NO_ERROR)
-                    {
-                        println("OpenGL error after prefilter render: $error")
-                    }
+                    if(error!=GL_NO_ERROR) println("OpenGL error after prefilter render: $error")
                 }
             }
         }

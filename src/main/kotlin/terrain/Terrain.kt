@@ -1,18 +1,22 @@
 package terrain
 
 import engine.Mesh
+import org.fancryer.terrain.heightsource.HeightSource
+import org.fancryer.utils.loop2
 import org.joml.Vector3f
-import terrain.noise.Noise
-import terrain.noise.PerlinNoise
 
-class Terrain(private val size:Int=64,private val scale:Float=1.0f,private val seed:Int=42)
+class Terrain(
+    val length:Int=64,
+    val width:Int=length,
+    val lengthScale:Float=64f/length,
+    val widthScale:Float=64f/width,
+    val heightScale:Float=lengthScale,
+    private val thickness:Float=5f,
+    heightSourceInit:Terrain.()->HeightSource
+)
 {
+    private val heightSource:HeightSource=heightSourceInit()
     private lateinit var mesh:Mesh
-    private val noise:Noise=generateNoise()
-
-    private fun generateNoise():Noise=PerlinNoise(seed)//.let(::RidgedNoise)
-
-    private val thickness=5f
 
     fun init()
     {
@@ -23,63 +27,39 @@ class Terrain(private val size:Int=64,private val scale:Float=1.0f,private val s
         mesh.init(vertices,normals,indices)
     }
 
+    private fun idx(x:Int,z:Int)=z*width+x
+
     private fun generateVertices():FloatArray
     {
         val vertices=mutableListOf<Float>()
-        val noiseScale=0.1f
 
-        var minHeight=Float.POSITIVE_INFINITY
+        val (heights,minHeight,maxHeight)=heightSource.calculateHeights(width,length)
+        println("minHeight: $minHeight")
+        println("heights: ${heights.dropWhile {it==-1f}.take(100)}")
 
-        // --- верхняя поверхность ---
-        val heights=FloatArray(size*size)
+        // --- ищем max, чтобы знать диапазон ---
+        val range=(maxHeight-minHeight).coerceAtLeast(1e-6f)
 
-        for(z in 0..<size)
-        {
-            for(x in 0..<size)
-            {
+        // ---------- TOP ----------
+        loop2(0..<length,0..<width) {z,x->
+            val worldX=x*widthScale
+            val worldZ=z*lengthScale
 
-                val nx=x*noiseScale
-                val nz=z*noiseScale
+            val h=heights[idx(x,z)]
+            val shifted=h-minHeight
+            val y=thickness+shifted*heightScale/range
 
-                val y=noise.noise(nx,nz)*10f
-
-                heights[z*size+x]=y
-
-                if(y<minHeight) minHeight=y
-            }
+            vertices+=listOf(worldX,y,worldZ)
         }
 
-        // записываем верх
-        for(z in 0 until size)
-        {
-            for(x in 0 until size)
-            {
+        // ---------- BOTTOM ----------
+        val bottomY=0f
 
-                val worldX=x*scale
-                val worldZ=z*scale
-                val y=heights[z*size+x]
+        loop2(0..<length,0..<width) {z,x->
+            val worldX=x*widthScale
+            val worldZ=z*lengthScale
 
-                vertices.add(worldX)
-                vertices.add(y)
-                vertices.add(worldZ)
-            }
-        }
-
-        // --- плоское дно ---
-        val bottomY=minHeight-thickness
-
-        for(z in 0 until size)
-        {
-            for(x in 0 until size)
-            {
-
-                val worldX=x*scale
-                val worldZ=z*scale
-
-                vertices.add(worldX)
-                vertices.add(bottomY)
-                vertices.add(worldZ)
-            }
+            vertices+=listOf(worldX,bottomY,worldZ)
         }
 
         return vertices.toFloatArray()
@@ -88,114 +68,70 @@ class Terrain(private val size:Int=64,private val scale:Float=1.0f,private val s
     private fun generateIndices():IntArray
     {
         val indices=mutableListOf<Int>()
-        val v=size*size
+        val v=length*width
 
         // ---------- TOP ----------
-        for(z in 0 until size-1)
-        {
-            for(x in 0 until size-1)
-            {
-                val tl=z*size+x
-                val tr=tl+1
-                val bl=(z+1)*size+x
-                val br=bl+1
+        loop2(0..<length-1,0..<width-1) {z,x->
+            val tl=idx(x,z)
+            val tr=tl+1
+            val bl=idx(x,z+1)
+            val br=bl+1
 
-                indices.add(tl)
-                indices.add(bl)
-                indices.add(tr)
-
-                indices.add(tr)
-                indices.add(bl)
-                indices.add(br)
-            }
+            indices+=listOf(tl,bl,tr,tr,bl,br)
         }
 
         // ---------- BOTTOM ----------
-        for(z in 0 until size-1)
-        {
-            for(x in 0 until size-1)
-            {
-                val tl=v+z*size+x
-                val tr=tl+1
-                val bl=v+(z+1)*size+x
-                val br=bl+1
+        loop2(0..<length-1,0..<width-1) {z,x->
+            val tl=v+idx(x,z)
+            val tr=tl+1
+            val bl=v+idx(x,z+1)
+            val br=bl+1
 
-                indices.add(tl)
-                indices.add(tr)
-                indices.add(bl)
-
-                indices.add(tr)
-                indices.add(br)
-                indices.add(bl)
-            }
+            indices+=listOf(tl,tr,bl,tr,br,bl)
         }
 
         // ---------- FRONT (z = 0) ----------
-        for(x in 0 until size-1)
+        for(x in 0..<width-1)
         {
             val tl=x
             val tr=x+1
             val bl=v+x
             val br=v+x+1
 
-            indices.add(tr)
-            indices.add(bl)
-            indices.add(tl)
-
-            indices.add(br)
-            indices.add(bl)
-            indices.add(tr)
+            indices+=listOf(tr,bl,tl,br,bl,tr)
         }
 
-        // ---------- BACK (z = size-1) ----------
-        for(x in 0 until size-1)
+        // ---------- BACK (z = length-1) ----------
+        for(x in 0..<width-1)
         {
-            val tl=(size-1)*size+x
+            val tl=idx(x,length-1)
             val tr=tl+1
-            val bl=v+(size-1)*size+x
+            val bl=v+tl
             val br=bl+1
 
-            indices.add(tl)
-            indices.add(bl)
-            indices.add(tr)
-
-            indices.add(tr)
-            indices.add(bl)
-            indices.add(br)
+            indices+=listOf(tl,bl,tr,tr,bl,br)
         }
 
         // ---------- LEFT (x = 0) ----------
-        for(z in 0 until size-1)
+        for(z in 0..<length-1)
         {
-            val tl=z*size
-            val tr=(z+1)*size
-            val bl=v+z*size
-            val br=v+(z+1)*size
+            val tl=idx(0,z)
+            val tr=idx(0,z+1)
+            val bl=v+tl
+            val br=v+tr
 
-            indices.add(tl)
-            indices.add(bl)
-            indices.add(tr)
-
-            indices.add(tr)
-            indices.add(bl)
-            indices.add(br)
+            indices+=listOf(tl,bl,tr,tr,bl,br)
         }
 
-        // ---------- RIGHT (x = size-1) ----------
-        for(z in 0 until size-1)
+        // ---------- RIGHT (x = width-1) ----------
+        for(z in 0..<length-1)
         {
-            val tl=z*size+size-1
-            val tr=(z+1)*size+size-1
-            val bl=v+z*size+size-1
-            val br=v+(z+1)*size+size-1
+            val tl=idx(width-1,z)
+            val tr=idx(width-1,z+1)
+            val bl=v+tl
+            val br=v+tr
 
-            indices.add(tr)
-            indices.add(bl)
-            indices.add(tl)
-
-            indices.add(br)
-            indices.add(bl)
-            indices.add(tr)
+            indices+=listOf(tr,bl,tl,br,bl,tr)
         }
 
         return indices.toIntArray()
@@ -207,7 +143,7 @@ class Terrain(private val size:Int=64,private val scale:Float=1.0f,private val s
         val normals=FloatArray(vertices.size)
         val vertexNormals=Array(vertices.size/3) {Vector3f()}
 
-        val topTriangleCount=(size-1)*(size-1)*2
+        val topTriangleCount=(length-1)*(width-1)*2
 
         var triIndex=0
 

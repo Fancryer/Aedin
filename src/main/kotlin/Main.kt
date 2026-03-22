@@ -6,7 +6,9 @@ import engine.Window
 import engine.input.InputManager
 import engine.input.MouseAxis
 import org.fancryer.AedinError.Companion.aedinError
+import org.fancryer.engine.Sampling
 import org.fancryer.engine.ShaderProgram
+import org.fancryer.terrain.heightsource.ImageHeightSource
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL11C.*
@@ -14,7 +16,6 @@ import skybox.HDRIEnvironment
 import skybox.Skybox
 import terrain.Terrain
 import utils.Time
-import kotlin.random.Random
 
 fun main()
 {
@@ -46,7 +47,14 @@ fun main()
         setUniform1i("skybox",0)
     }
 
-    val terrain=Terrain(64,1.0f,Random.nextInt()).apply {init()}
+    val terrain=Terrain(256,heightScale=10f,thickness=5f) {
+        ImageHeightSource(
+            "/home/alice/Загрузки/Dark Alien Landscape Height Map/Height Map.png",
+            1f,
+            Sampling.Bilinear
+        )
+    }
+    terrain.init()
     val modelMatrix=Matrix4f()
 
     // TODO Begin > terrain < End
@@ -90,8 +98,8 @@ fun main()
         shaderProgram.setUniform3f("objectColor",0.2f,0.625f,0.2f)  // зелёный ландшафт
         shaderProgram.setUniform1f("exposure",2f)   // яркие HDR
 
-        shaderProgram.setUniform1f("roughness",0.1f)
-        shaderProgram.setUniform1f("metallic",0.04f)
+        shaderProgram.setUniform1f("roughness",0f)
+        shaderProgram.setUniform1f("metallic",1f)
 
         terrain.render()
 

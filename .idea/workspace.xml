@@ -4,51 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23507712-90ae-4002-af76-867fbe7e6318" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Camera.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Mesh.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Renderer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/ShaderProgram.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Window.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/input/ActionBinding.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/input/AxisBinding.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/input/InputManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/input/InputType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/input/MouseAxisBinding.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/skybox/HDRIEnvironment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/skybox/Skybox.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/Terrain.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/Noise.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/PerlinNoise.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/RidgedNoise.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/Time.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fragment.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/brdf.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/brdf.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/convert.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/convert.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/irradiance.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/irradiance.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/prefilter.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ibl/prefilter.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/skybox/skybox.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/skybox/skybox.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/vertex.vert" afterDir="false" />
+    <list default="true" id="23507712-90ae-4002-af76-867fbe7e6318" name="Changes" comment="Initial...">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Sampling.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Scale.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/heightsource/HeightSource.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/heightsource/ImageHeightSource.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/heightsource/NoiseHeightSource.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/Loops.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/utils/MinMax.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/engine/Renderer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/engine/Renderer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/skybox/HDRIEnvironment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/skybox/HDRIEnvironment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/terrain/Terrain.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/Terrain.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/Noise.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/Noise.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/PerlinNoise.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/PerlinNoise.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/RidgedNoise.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/terrain/noise/RidgedNoise.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fragment.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fragment.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ibl/convert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ibl/convert.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ibl/prefilter.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ibl/prefilter.frag" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +68,12 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="asessments" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="distribution" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="asessments" type="f1a62948:ProjectNode" />
                 <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
@@ -105,15 +86,28 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="vs-template" />
         <option value="fs-template" />
+        <option value="Kotlin Enum" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Fancryer&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Fancryer/Aedin.git&quot;,
+    &quot;accountId&quot;: &quot;19b61c5f-b3d9-4d07-b3b8-c1f94d77ce4f&quot;
+  }
+}</component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="$USER_HOME$/.gradle/wrapper/dists/gradle-9.4.0-bin/lcvyxq3t37f6mx9miaydrrgs/gradle-9.4.0" javaHome="$USER_HOME$/.jdks/graalvm-jdk-23.0.2" gradleVersion="9.4.0" />
   <component name="KotlinCodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
@@ -130,6 +124,7 @@
   &quot;keyToString&quot;: {
     &quot;Gradle.Build asessments.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.asessments [assembleDist].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.asessments [build].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.asessments [run].executor&quot;: &quot;Run&quot;,
     &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
@@ -146,7 +141,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.25614592&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -197,6 +192,31 @@
       <setting name="useHeartbeat" value="true" />
       <setting name="focusEditor" value="false" />
       <setting name="urlFile" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="asessments [assembleDist]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleDist" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="asessments [build]" type="GradleRunConfiguration" factoryName="Gradle">
@@ -259,6 +279,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.asessments [run]" />
+        <item itemvalue="Gradle.asessments [assembleDist]" />
         <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
@@ -304,8 +325,23 @@
       <workItem from="1773745081295" duration="9010000" />
       <workItem from="1773759601744" duration="7815000" />
       <workItem from="1773817847534" duration="7343000" />
-      <workItem from="1773829488029" duration="360000" />
+      <workItem from="1773829488029" duration="1850000" />
+      <workItem from="1773907797356" duration="3622000" />
+      <workItem from="1773983780095" duration="2572000" />
+      <workItem from="1773986880228" duration="4212000" />
+      <workItem from="1774062992422" duration="4087000" />
+      <workItem from="1774077917422" duration="7353000" />
+      <workItem from="1774099915838" duration="8298000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial...">
+      <option name="closed" value="true" />
+      <created>1773829935811</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1773829935811</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +357,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial..." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

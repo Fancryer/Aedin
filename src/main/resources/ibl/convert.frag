@@ -9,6 +9,7 @@ const vec2 invAtan = vec2(0.1591, 0.3183);
 
 vec2 SampleSphericalMap(vec3 v)
 {
+    v = clamp(v, vec3(-1.0), vec3(1.0));
     vec2 uv = vec2(atan(v.z, v.x), asin(v.y));
     uv *= invAtan;
     uv += 0.5;
@@ -19,6 +20,9 @@ void main()
 {
     vec2 uv = SampleSphericalMap(normalize(WorldPos));
     vec3 color = texture(equirectangularMap, uv).rgb;
+    if(any(isnan(color))) color = vec3(0.0);
+
+    color = min(color, vec3(100.0));
 
     FragColor = vec4(color, 1.0);
 }

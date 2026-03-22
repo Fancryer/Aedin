@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     kotlin("jvm") version "2.3.10"
     application
@@ -9,6 +11,16 @@ version="1.0-SNAPSHOT"
 repositories {mavenCentral()}
 
 application {mainClass="org.fancryer.MainKt"}
+
+kotlin {
+    compilerOptions {
+        jvmTarget=JvmTarget.JVM_17
+    }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 dependencies {
     val lwjglVersion="3.4.1"

@@ -2,6 +2,6 @@ package terrain.noise
 
 interface Noise
 {
-    val scale:Float
+    val amplitude:Float
     fun noise(x:Float,z:Float):Float
 }

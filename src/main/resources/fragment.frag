@@ -114,6 +114,7 @@ void main()
     // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0
     // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)
     vec3 F0 = vec3(0.04);
+    float metallic = clamp(metallic, 0.0, 0.999);
     F0 = mix(F0, albedo, metallic);
 
     // ambient lighting (we now use IBL as the ambient term)
@@ -145,4 +146,5 @@ void main()
     color = pow(color, vec3(1.0/2.2));
 
     FragColor = vec4(color, 1.0);
+    //FragColor = vec4(N * 0.5 + 0.5, 1.0);
 }
